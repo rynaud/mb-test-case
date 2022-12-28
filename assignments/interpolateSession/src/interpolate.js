@@ -4,7 +4,7 @@ const interpolate = (value, session = {}, options = {}) => {
     "g"
   );
   return value.replace(regexp, function (ignore, key) {
-    return (key = session[key]) == null ? "" : key;
+    return (key = session[key]) === null ? "" : key;
   });
 };
 
