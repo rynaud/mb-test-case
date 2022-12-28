@@ -1,16 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Form from './components/form';
+import { io } from 'socket.io-client';
 
 function App() {
-  const onSubmit = (e) => {
-    e.preventDefault();
-  }
-
+  let socket = io('https://localhost:3000/')
 
   return (
     <div className="App">
-      <form onSubmit={onSubmit}></form>
+      <Form />
     </div>
   );
 }
