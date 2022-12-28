@@ -7,13 +7,8 @@ const server = http.createServer(app);
 const port: number = 3000;
 const io = new socketio.Server(server);
 
-app.get("/", (_req: Request, _res: Response) => {
-  console.log(_req.body);
-  _res.send("TypeScript With Express");
-});
-
 io.on("connection", (socket: Socket) => {
-  console.log("connected");
+  console.log(socket);
 });
 
 server.listen(port, () => {
