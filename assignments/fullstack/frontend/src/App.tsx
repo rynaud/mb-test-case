@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Form from './components/form';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
+import { FormTypes } from './components/form/form';
+import ChatBox from './components/chatbox';
 
-function App() {
-  let socket = io('https://localhost:3000/')
+interface App {
+  socket: Socket
+}
+
+function App({ socket }: App) {
+  const [data, setData] = useState<FormTypes[]>([]);
+
+  useEffect(() => {
+    socket.on('listener', (data: FormTypes) => {
+      setData(prev => ([
+        ...prev,
+        data
+      ]))
+    })
+
+    return () => {
+      socket.off('listener');
+    };
+  }, [])
 
   return (
     <div className="App">
-      <Form />
+      <ChatBox data={data} />
+      <Form setData={setData} socket={socket} />
     </div>
   );
 }

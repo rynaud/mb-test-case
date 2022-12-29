@@ -12,7 +12,7 @@ const Input = styled(TextField)({
 
 function CustomTextField({ label, name, ...props }: TextFieldProps) {
     return (
-        <Input name={name} data-testid={`${name}-testid`} label={label} variant="outlined" />
+        <Input name={name} data-testid={`${name}-testid`} label={label} variant="outlined" {...props} />
     )
 }
 
